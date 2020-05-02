@@ -82,9 +82,9 @@ void ACharacterController::SetupPlayerInputComponent(class UInputComponent* Play
 	// We have 2 versions of the rotation bindings to handle different kinds of devices differently
 	// "turn" handles devices that provide an absolute delta, such as a mouse.
 	// "turnrate" is for devices that we choose to treat as a rate of change, such as an analog joystick
-	PlayerInputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
+	//PlayerInputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
 	//PlayerInputComponent->BindAxis("TurnRate", this, &ACharacterController::TurnAtRate);
-	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
+	//PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
 	//PlayerInputComponent->BindAxis("LookUpRate", this, &ACharacterController::LookUpAtRate);
 }
 
@@ -100,20 +100,24 @@ void ACharacterController::StopJumping()
 
 void ACharacterController::MoveForward(float Value)
 {
-	FRotator Rotation = Controller->GetControlRotation();
-	FRotator YawRotation(0.0f, Rotation.Yaw, 0.0f);
-
-	FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
+	if ((Controller) && (Value != 0.0f))
+	{
+		FRotator Rotation = Controller->GetControlRotation();
+		FRotator YawRotation(0.0f, Rotation.Yaw, 0.0f);
+		FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
+		AddMovementInput(Direction, Value);
+	}
 }
-
 void ACharacterController::MoveRight(float Value)
 {
-	FRotator Rotation = Controller->GetControlRotation();
-	FRotator YawRotation(0.0f, Rotation.Yaw, 0.0f);
-
-	FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
+	if ((Controller) && (Value != 0.0f))
+	{
+		FRotator Rotation = Controller->GetControlRotation();
+		FRotator YawRotation(0.0f, Rotation.Yaw, 0.0f);
+		FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
+		AddMovementInput(Direction, Value);
+	}
 }
-
 /* void ACharacterController::TurnAtRate(float Rate)
 {
 	// calculate delta for this frame from the rate information
