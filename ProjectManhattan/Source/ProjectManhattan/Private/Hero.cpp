@@ -1,6 +1,5 @@
 // GameDev.tv Community Podcast 2020
 
-
 #include "Hero.h"
 
 // Sets default values
