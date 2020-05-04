@@ -5,10 +5,10 @@ using System.Collections.Generic;
 
 public class ProjectManhattanEditorTarget : TargetRules
 {
-	public ProjectManhattanEditorTarget( TargetInfo Target) : base(Target)
+	public ProjectManhattanEditorTarget(TargetInfo Target) : base(Target)
 	{
 		Type = TargetType.Editor;
-
-		ExtraModuleNames.AddRange( new string[] { "ProjectManhattan" } );
+		DefaultBuildSettings = BuildSettingsVersion.V2;
+		ExtraModuleNames.Add("ProjectManhattan");
 	}
 }

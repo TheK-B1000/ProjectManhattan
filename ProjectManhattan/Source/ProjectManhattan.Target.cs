@@ -5,10 +5,10 @@ using System.Collections.Generic;
 
 public class ProjectManhattanTarget : TargetRules
 {
-	public ProjectManhattanTarget( TargetInfo Target) : base(Target)
+	public ProjectManhattanTarget(TargetInfo Target) : base(Target)
 	{
 		Type = TargetType.Game;
-
-		ExtraModuleNames.AddRange( new string[] { "ProjectManhattan" } );
+		DefaultBuildSettings = BuildSettingsVersion.V2;
+		ExtraModuleNames.Add("ProjectManhattan");
 	}
 }
